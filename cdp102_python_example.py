@@ -131,16 +131,16 @@ if userId:
     for k, v in requestHeaders.items():
         request.add_header(k, v)
 
-  # perform the request
-  response = urllib.request.urlopen(request)
-  results = response.read().decode(encoding)
+    # perform the request
+    response = urllib.request.urlopen(request)
+    results = response.read().decode(encoding)
 
-  # create a dictionary from the results
-  responseDictionary = json.loads(results)
+    # create a dictionary from the results
+    responseDictionary = json.loads(results)
 
-  print(results)
+    print(results)
 else:
-  print("error retrieving user information. 'userId' was not present")
+    print("error retrieving user information. 'userId' was not present")
 
 # get the capabilities of this Smart+Connected Digital Platform instance
 # <CDP-BaseURL>/capabilities/customer/<customer_id>
