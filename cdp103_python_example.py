@@ -14,10 +14,10 @@ import urllib.parse, urllib.request, json
 #   4) Putting all the infotmation together to make a Real Time Data API request
 
 # Smart+Connected Digital Platform API URL for Login
-loginUrl = 'http://10.10.20.6/apigw/devnetlabtokenapi/login'
+loginUrl = 'http://10.10.20.6/cdp/v1/login'
 
 # Base Smart+Connected Digital Platform API URL for all other requests
-baseUrl = 'http://10.10.20.6/apigw/devnetlabapi/cdp/v1'
+baseUrl = 'http://10.10.20.6/cdp/v1'
 
 # specify default values so you don't have to type them in every time
 # @Note: these are not valid, so you need to replace them with your actual username and password
