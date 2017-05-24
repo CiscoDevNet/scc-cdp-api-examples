@@ -81,12 +81,12 @@ print('requestHeaders')
 print(requestHeaders)
 
 # get user info for the logged in user
-# <CDP-BaseURL>/accounts/username?loginName=user123@cdp.com
+# <CDP-BaseURL>/accounts?loginName=user123@cdp.com
 
 # username resource requires one queryparam: the username for which you are retrieving information
 queryParams =  urllib.parse.urlencode({'loginName': postData['username']})
 
-requestUrl = baseUrl + '/accounts/username?%s' % queryParams
+requestUrl = baseUrl + '/accounts?%s' % queryParams
 
 print('\nGetting **USER** Information (' + requestUrl + ')\n')
 
