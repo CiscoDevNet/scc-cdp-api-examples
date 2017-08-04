@@ -1,10 +1,10 @@
 # scc-cdp-api-examples
 
-### This repo contains short example scripts that demonstrate and exmplain aspects of the Smart+Connected Digital Platform APIs.
+### This repo contains short example scripts that demonstrate and explain aspects of the Smart+Connected Digital Platform APIs.
 
-##Examples
+## Examples
 
-####There are currently three example Python scripts in this repo:
+#### There are currently three example Python scripts in this repo:
 
 * cdp101\_python\_example.py - **Authentication and API Requests**
 	* This sample script demonstrates logging into the Smart+Connected Digital Platform and making an additional request. All Smart+Connected Digital Platform APIs (except authentication) require access tokens. In this example, those access tokens are obtained through the /login API and used to make another API request.
