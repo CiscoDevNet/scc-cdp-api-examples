@@ -9,9 +9,9 @@ import urllib.parse, urllib.request, json
 #   the requests necessary to get the data we need for the Real Time Data APIs.
 # The main ideas in this sample are:
 #   1) Logging in
-#   2) Parsing the login reponse to get tokens needed for futher API calls
+#   2) Parsing the login response to get tokens needed for further API calls
 #   3) Using the tokens to make several API requests to get the information needed Real Time Data APIs
-#   4) Putting all the infotmation together to make a Real Time Data API request
+#   4) Putting all the information together to make a Real Time Data API request
 
 # Smart+Connected Digital Platform API URL for Login
 loginUrl = 'http://10.10.20.6/cdp/v1/login'
@@ -106,7 +106,7 @@ responseDictionary = json.loads(results)
 # print(results)
 
 # LEARNING LAB 2 CODE BEGINS HERE
-# CDP102 - Retrieving Addional Information from the Smart+Connected Digital Platform API
+# CDP102 - Retrieving Additional Information from the Smart+Connected Digital Platform API
 
 # Prerequisites: CDP101
 

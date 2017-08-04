@@ -7,7 +7,7 @@ import urllib.parse, urllib.request, json
 #   passed in request headers.
 # The main ideas in this sample are:
 #   1) Logging in
-#   2) Parsing the login reponse to get tokens needed for futher API calls
+#   2) Parsing the login response to get tokens needed for further API calls
 #   3) Using the tokens to make another API request
 
 # Smart+Connected Digital Platform API URL for Login
