@@ -28,9 +28,9 @@ defaultPass = 'password'
 # @Note: these are the DevNet sandbox client_id and client_secret values, so you will
 #   need to replace them with yours if you are using another instance of the Smart+Connected Digital Platform
 postData = {
-    'client_id':'a27b18484c3c4e08a7c193e42c639347',
-    'client_secret':'b863de8f453c4a05A88126F45B958CF1',
-    'grant_type':'client_credentials'
+    'client_id': 'a27b18484c3c4e08a7c193e42c639347',
+    'client_secret': 'b863de8f453c4a05A88126F45B958CF1',
+    'grant_type': 'client_credentials'
 }
 
 # get username and password from commandline
@@ -72,8 +72,8 @@ print(responseDictionary)
 
 # get the auth tokens from the response - these are needed in all future Smart+Connected Digital Platform API Requests
 requestHeaders = {
-    'WSO2-Authorization' : 'oAuth Bearer ' + responseDictionary['app_access_token'],
-    'Authorization' : 'Bearer ' + responseDictionary['api_access_token'],
+    'WSO2-Authorization': 'oAuth Bearer ' + responseDictionary['app_access_token'],
+    'Authorization': 'Bearer ' + responseDictionary['api_access_token'],
     'Accept': 'application/json'
 }
 
@@ -84,7 +84,7 @@ print(requestHeaders)
 # <CDP-BaseURL>/accounts?loginName=user123@cdp.com
 
 # username resource requires one queryparam: the username for which you are retrieving information
-queryParams =  urllib.parse.urlencode({'loginName': postData['username']})
+queryParams = urllib.parse.urlencode({'loginName': postData['username']})
 
 requestUrl = baseUrl + '/accounts?%s' % queryParams
 
@@ -110,7 +110,8 @@ responseDictionary = json.loads(results)
 
 # Prerequisites: CDP101
 
-# we need to get the customerid and userid from the response, these are needed to get data from the Smart+Connected Digital Platform API
+# we need to get the customerid and userid from the response,
+# these are needed to get data from the Smart+Connected Digital Platform API
 customerId = None
 userId = None
 
@@ -170,7 +171,6 @@ if customerId:
 else:
     print("error retrieving user information. 'customerId' was not present")
 
-
 # LEARNING LAB 3 CODE BEGINS HERE
 # CDP103 - Retrieving Real Time Device Data From the Smart+Connected Digital Platform API
 
@@ -179,20 +179,20 @@ else:
 # build the request URL and add the customerId and userId query params
 
 # real time device data requests require two query params: UserKey and SensorCustomerKey
-queryParams =  urllib.parse.urlencode({'UserKey': userId, 'SensorCustomerKey' : customerId, 'AppKey' : 'CDP-App'})
+queryParams = urllib.parse.urlencode({'UserKey': userId, 'SensorCustomerKey': customerId, 'AppKey': 'CDP-App'})
 
 requestUrl = baseUrl + "/devices/lighting?%s" % queryParams
 
 # create the TQL POST Body
 postData = {"Query":
-    {"Find":
-        {"Light":
-            {"sid":
-                {"ne":""}
+                {"Find":
+                     {"Light":
+                          {"sid":
+                               {"ne": ""}
+                           }
+                      }
+                 }
             }
-        }
-    }
-}
 
 # urlencode the data
 data = urllib.parse.urlencode(postData)
@@ -261,7 +261,7 @@ plt.pie(values, labels=labels, autopct='%1.1f%%', shadow=True)
 plt.axis('equal')
 
 # set the title of the plot and add some additional information - the total number of lights
-plt.title('Current Lighting States (Total Lights '+ str(values[0] + values[1]) + ')')
+plt.title('Current Lighting States (Total Lights ' + str(values[0] + values[1]) + ')')
 
 # show the graph
 plt.show()
