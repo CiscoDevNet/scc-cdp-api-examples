@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import urllib.parse, urllib.request, json
 
 # Requesting Real Time Data from the Smart+Connected Digital Platform
