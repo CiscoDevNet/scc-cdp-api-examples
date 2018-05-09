@@ -1,4 +1,10 @@
-import urllib.parse, urllib.request, json
+#!/usr/bin/env python
+
+import urllib.parse
+import urllib.request
+import json
+import os
+from pprint import pprint
 
 # Authentication and API Requests
 
@@ -7,44 +13,68 @@ import urllib.parse, urllib.request, json
 #   passed in request headers.
 # The main ideas in this sample are:
 #   1) Logging in
-#   2) Parsing the login reponse to get tokens needed for futher API calls
+#   2) Parsing the login response to get tokens needed for further API calls
 #   3) Using the tokens to make another API request
 
-# Smart+Connected Digital Platform API URL for Login
-loginUrl = 'http://10.10.20.6/cdp/v1/login'
-
 # Base Smart+Connected Digital Platform API URL for all other requests
-baseUrl = 'http://10.10.20.6/cdp/v1'
+if 'SCC_BASE_URL' in os.environ:
+    print('SCC_BASE_URL is set to {}'.format(os.environ['SCC_BASE_URL']))
+else:
+    print('SCC_BASE_URL has not been set.')
+    exit()
+
+baseUrl = os.environ['SCC_BASE_URL']
+
+# Smart+Connected Digital Platform API URL for Login
+loginUrl = baseUrl + '/login'
 
 # specify default values so you don't have to type them in every time
 # @Note: these are not valid, so you need to replace them with your actual username and password
-defaultUser = 'user123@cdp.com'
-defaultPass = 'password'
+if 'SCC_USER' in os.environ:
+    print('SCC_USER is set to {}'.format(os.environ['SCC_USER']))
+else:
+    print('SCC_USER has not been set.')
+    exit()
+
+defaultUser = os.environ['SCC_USER']
+
+if 'SCC_PASS' in os.environ:
+    print('SCC_PASS is set to {}'.format('*****'))
+else:
+    print('SCC_PASS has not been set.')
+    exit()
+
+defaultPass = os.environ['SCC_PASS']
+
+if 'SCC_CLIENT_ID' in os.environ:
+    print('SCC_CLIENT_ID is set to {}'.format(os.environ['SCC_CLIENT_ID']))
+else:
+    print('SCC_CLIENT_ID has not been set.')
+    exit()
+
+client_id = os.environ['SCC_CLIENT_ID']
+
+if 'SCC_CLIENT_SECRET' in os.environ:
+    print('SCC_CLIENT_SECRET is set to {}'.format(os.environ['SCC_CLIENT_SECRET']))
+else:
+    print('SCC_CLIENT_SECRET has not been set.')
+    exit()
+
+client_secret = os.environ['SCC_CLIENT_SECRET']
+
 
 # this dictionary contains the post body we will send to the /login API
 # @Note: these are the DevNet sandbox client_id and client_secret values, so you will
 #   need to replace them with yours if you are using another instance of the Smart+Connected Digital Platform
-postData = {
-    'client_id':'a27b18484c3c4e08a7c193e42c639347',
-    'client_secret':'b863de8f453c4a05A88126F45B958CF1',
-    'grant_type':'client_credentials'
-}
+postData = {'client_id': client_id,
+            'client_secret': client_secret,
+            'grant_type': 'client_credentials',
+            'username': defaultUser,
+            'password': defaultPass
+            }
 
-# get username and password from commandline
-#   @Note: this will use the defaults from above if you just press 'enter'
-username = input('Enter username (email address): ')
-if username == '':
-    username = defaultUser
-
-password = input('Enter password: ')
-if password == '':
-    password = defaultPass
-
-# Add username/password to post data
-postData['username'] = username
-postData['password'] = password
-
-# post data now includes client_secret, client_id, username, password and grant_type
+print('\nPost Data \n')
+pprint(postData)
 
 # urlencode the data
 data = urllib.parse.urlencode(postData)
@@ -69,8 +99,8 @@ print(responseDictionary)
 
 # get the auth tokens from the response - these are needed in all future Smart+Connected Digital Platform API Requests
 requestHeaders = {
-    'WSO2-Authorization' : 'oAuth Bearer ' + responseDictionary['app_access_token'],
-    'Authorization' : 'Bearer ' + responseDictionary['api_access_token'],
+    'WSO2-Authorization': 'oAuth Bearer ' + responseDictionary['app_access_token'],
+    'Authorization': 'Bearer ' + responseDictionary['api_access_token'],
     'Accept': 'application/json'
 }
 
@@ -81,7 +111,7 @@ print(requestHeaders)
 # <CDP-BaseURL>/accounts?loginName=user123@cdp.com
 
 # username resource requires one queryparam: the username for which you are retrieving information
-queryParams =  urllib.parse.urlencode({'loginName': postData['username']})
+queryParams = urllib.parse.urlencode({'loginName': defaultUser})
 
 requestUrl = baseUrl + '/accounts?%s' % queryParams
 
@@ -93,6 +123,14 @@ request = urllib.request.Request(requestUrl)
 # add headers (for API authorization)
 for k, v in requestHeaders.items():
     request.add_header(k, v)
+
+print('requestHeaders:\n')
+pprint(requestHeaders)
+
+print('request:\n')
+pprint(request)
+
+print('Performing the request...')
 
 # perform the request
 response = urllib.request.urlopen(request)

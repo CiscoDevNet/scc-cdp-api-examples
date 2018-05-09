@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import urllib.parse, urllib.request, json
 
 # Retrieving Information from the Smart+Connected Digital Platform
@@ -7,7 +9,7 @@ import urllib.parse, urllib.request, json
 #   passed in request headers.
 # The main ideas in this sample are:
 #   1) Logging in
-#   2) Parsing the login reponse to get tokens needed for futher API calls
+#   2) Parsing the login response to get tokens needed for further API calls
 #   3) Using the tokens to make several API requests
 
 # Smart+Connected Digital Platform API URL for Login
@@ -25,9 +27,9 @@ defaultPass = 'password'
 # @Note: these are the DevNet sandbox client_id and client_secret values, so you will
 #   need to replace them with yours if you are using another instance of the Smart+Connected Digital Platform
 postData = {
-    'client_id':'a27b18484c3c4e08a7c193e42c639347',
-    'client_secret':'b863de8f453c4a05A88126F45B958CF1',
-    'grant_type':'client_credentials'
+    'client_id': 'a27b18484c3c4e08a7c193e42c639347',
+    'client_secret': 'b863de8f453c4a05A88126F45B958CF1',
+    'grant_type': 'client_credentials'
 }
 
 # get username and password from commandline
@@ -69,8 +71,8 @@ print(responseDictionary)
 
 # get the auth tokens from the response - these are needed in all future Smart+Connected Digital Platform API Requests
 requestHeaders = {
-    'WSO2-Authorization' : 'oAuth Bearer ' + responseDictionary['app_access_token'],
-    'Authorization' : 'Bearer ' + responseDictionary['api_access_token'],
+    'WSO2-Authorization': 'oAuth Bearer ' + responseDictionary['app_access_token'],
+    'Authorization': 'Bearer ' + responseDictionary['api_access_token'],
     'Accept': 'application/json'
 }
 
@@ -81,7 +83,7 @@ print(requestHeaders)
 # <CDP-BaseURL>/accounts?loginName=user123@cdp.com
 
 # username resource requires one queryparam: the username for which you are retrieving information
-queryParams =  urllib.parse.urlencode({'loginName': postData['username']})
+queryParams = urllib.parse.urlencode({'loginName': postData['username']})
 
 requestUrl = baseUrl + '/accounts?%s' % queryParams
 
@@ -105,7 +107,8 @@ responseDictionary = json.loads(results)
 
 # Prerequisites: CDP101
 
-# we need to get the customerid and userid from the response, these are needed to get data from the Smart+Connected Digital Platform API
+# we need to get the customerid and userid from the response,
+# these are needed to get data from the Smart+Connected Digital Platform API
 customerId = None
 userId = None
 
